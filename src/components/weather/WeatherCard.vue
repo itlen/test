@@ -12,7 +12,6 @@
 
 import weatherweek from '@/components/weather/WeatherWeek.vue'
 import axios from 'axios'
-import VueAxios from 'vue-axios'
 
 export default {
   name: 'weathercard',
@@ -33,8 +32,7 @@ export default {
       default: false
     },
     geocoords: {
-      type: Array,
-      default: []
+      type: Array
     }
   },
   data: function () {
@@ -75,15 +73,13 @@ export default {
     _getForecastDataFromYandexWeatherApi () {
       let url = 'https://api.weather.yandex.ru/v1/forecast?&lat=' + this.geocoords[0] + '&lon=' + this.geocoords[1] + '&lang=ru_RU&limit=7&hours=true&extra=true'
 
-      console.log(url)
-
       axios.get(url, {
         headers: {
           'X-Yandex-API-Key': '1b3167ea-52d5-4c7f-bc50-59494434bc3f'
         } })
         .then((response) => {
           return response.data
-        }).catch((e) => console.log(e))
+        }).catch()
     }
   }
 

@@ -64,7 +64,6 @@ export default {
   methods: {
 
     onFocus () {
-      let input = this.$el.querySelector('.contact-form__form__input-wrapper__input-element')
       let label = this.$el.querySelector('.contact-form__form__input-wrapper__label')
       label.classList.add('active')
     },
