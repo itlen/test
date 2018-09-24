@@ -89,7 +89,7 @@ export default {
       let input = this.$el.querySelector('.contact-form__form__input-wrapper__input-element')
       let validKeys = [8, 9, 37, 39, 46, 189, 16, 18] // left, right, del, backspace, tab, - , shift, alt
 
-      if ((this.type == 'text' && !this._validate(event.key))) {
+      if ((this.type === 'text' && !this._validate(event.key))) {
         if (!validKeys.includes(event.which)) {
           event.preventDefault()
 

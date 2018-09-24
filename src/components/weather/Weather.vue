@@ -57,20 +57,20 @@ export default {
   methods: {
 
     _setCurrent: function (idOrCity) {
-      this.items.map(i => i.id == (idOrCity || i.city == idOrCity) ? i.current = true : i.current = i.active = false)
+      this.items.map(function (i) { i.id === (idOrCity || i.city === idOrCity) ? i.current = true : i.current = i.active = false })
     },
 
     _setActive: function () {
-      this.items.map(i => i.current ? i.active = true : '')
+      this.items.map(function (i) { i.current === true ? i.active = true : false })
     },
 
     _resetActive: function () {
-      this.items.forEach(i => { i.active = false })
+      this.items.forEach(function (i) { i.active = false })
       return this
     },
 
     _resetCurrent: function () {
-      this.items.forEach(i => { i.current = i.active = false })
+      this.items.forEach(function (i) { i.current = i.active = false })
       return this
     }
   }

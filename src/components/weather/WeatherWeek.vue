@@ -15,8 +15,7 @@ export default {
       default: ''
     },
     temperature: {
-      type: Array,
-      default: []
+      type: Array
     },
     weather: {
       type: String,
