@@ -61,7 +61,7 @@ export default {
     },
 
     _setActive: function () {
-      this.items.map(function (i) { i.current === true ? i.active = true : false })
+      this.items.map(function (i) { i.current === true ? i.active = true : i.active = false })
     },
 
     _resetActive: function () {
