@@ -58,20 +58,16 @@ export default {
     }
   },
 
-
-
   mounted () {
     this.$nextTick(function () {
       if (this.active) this.$el.querySelector('.contact-form__form__input-wrapper__input-element').focus()
     })
   },
 
-
-
   methods: {
 
     onFocus () {
-      this.$el.querySelector('.contact-form__form__input-wrapper__label').classList.add('active')  
+      this.$el.querySelector('.contact-form__form__input-wrapper__label').classList.add('active')
     },
 
     onChange (event) {
@@ -81,46 +77,40 @@ export default {
       if (input.value.length > 0) {
         this.active = true
         label.classList.add('active')
-      }
-      else {
+      } else {
         this.active = false
         label.classList.remove('active')
       }
 
-      if ( input.value.length > 0 && !this._validate(input.value) ) this.invalid = true
+      if (input.value.length > 0 && !this._validate(input.value)) this.invalid = true
     },
-    
-    onKeydown: function(event) {
 
+    onKeydown: function (event) {
       let input = this.$el.querySelector('.contact-form__form__input-wrapper__input-element')
-      let validKeys = [8,9,37,39,46,189,16,18] //left, right, del, backspace, tab, - , shift, alt
+      let validKeys = [8, 9, 37, 39, 46, 189, 16, 18] // left, right, del, backspace, tab, - , shift, alt
 
-      if ( (this.type == 'text' && !this._validate(event.key)) ) {
-
-        if ( !validKeys.includes(event.which) ) {
+      if ((this.type == 'text' && !this._validate(event.key))) {
+        if (!validKeys.includes(event.which)) {
           event.preventDefault()
 
           input.style.borderColor = 'crimson'
           input.style.color = 'crimson'
 
-          setTimeout(()=>{
+          setTimeout(() => {
             input.style.borderColor = 'black'
             input.style.color = 'black'
           }, 300)
 
           return false
-
         }
       }
     },
-    
-    _validate: function(value) {
 
+    _validate: function (value) {
       let regExp = this.validateTemplates[this.type] ? this.validateTemplates[this.type] : ''
-      return regExp.test(value);
+      return regExp.test(value)
     }
   },
-
 
   data: function () {
     return {
@@ -133,7 +123,7 @@ export default {
         phone: ''
       }
     }
-  },
+  }
 }
 </script>
 

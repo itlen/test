@@ -21,7 +21,7 @@ export default {
     align-items: center;
     justify-content: space-between;
   }
-  
+
   nav {
     padding: 32px 0;
   }

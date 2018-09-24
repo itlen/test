@@ -10,9 +10,9 @@
       @blur="onChange"
       @change="onChange">
     </textarea>
-    <label class="contact-form__form__input-wrapper__label" 
+    <label class="contact-form__form__input-wrapper__label"
       :aria-label="label"
-      :class="{ active: active }" 
+      :class="{ active: active }"
       v-bind:for="id">{{this.label}}
     </label>
 
@@ -73,11 +73,10 @@ export default {
       let input = this.$el.querySelector('.contact-form__form__input-wrapper__input-element')
       let label = this.$el.querySelector('.contact-form__form__input-wrapper__label')
 
-      if (input.value.length > 0 ) {
+      if (input.value.length > 0) {
         this.active = true
         label.classList.add('active')
-      }
-      else {
+      } else {
         this.active = false
         label.classList.remove('active')
       }
@@ -86,7 +85,7 @@ export default {
   },
   data: function () {
     return {
-      activeLocal: this.active 
+      activeLocal: this.active
     }
   }
 }

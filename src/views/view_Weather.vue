@@ -5,11 +5,11 @@
 </template>
 
 <script>
-  import weatherpage from '@/components/weather/Weather.vue'
-  export default { 
-    name: 'view_weatherpage',
-    components: {
-      weatherpage
-    }
+import weatherpage from '@/components/weather/Weather.vue'
+export default {
+  name: 'view_weatherpage',
+  components: {
+    weatherpage
   }
+}
 </script>

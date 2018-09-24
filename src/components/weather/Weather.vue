@@ -4,17 +4,17 @@
       <h1 v-if="current_city">Погода в горде {{ this.current_city }} на <span  v-if="this.weekly" id="global-timer"></span><span v-else>неделю</span></h1>
 
       <h1 v-else>Погода на <span  v-if="this.weekly" id="global-timer"></span><span v-else>неделю</span></h1>
-      
-      <button class="weather__weather-header__button" 
-        v-for="item in items" 
+
+      <button class="weather__weather-header__button"
+        v-for="item in items"
         :key="item.id"
         :aria-label="item.city"
         :class="{current: item.current}"
         @click="_setCurrent(item.id)">{{ item.city }}</button>
     </div>
-    <weathercard 
-      v-for="item in items" 
-      :key="item.id" 
+    <weathercard
+      v-for="item in items"
+      :key="item.id"
       v-bind="item"
       @resetCurrent="_resetCurrent"
       @setActive="_setActive"
@@ -23,76 +23,74 @@
   </div>
 </template>
 
-
-
 <script>
-  import weathercard from '@/components/weather/WeatherCard.vue'
+import weathercard from '@/components/weather/WeatherCard.vue'
 
-  export default {
-    name: 'weatherpage',
-    components: {
-      weathercard
-    },
-    props: {
-      weekly: {
-        type: Boolean,
-        default: true
-      }
-    },
-    data: function () {
-      return {
-        items: [
-          {id: 1, city: 'Москва', current: false, active: false, geocoords: ['55.4507','37.3659']},
-          {id: 2, city: 'Санкт-Петербург', current: true, active: false, geocoords: ['56.50','60.35']},
-          {id: 3, city: 'Екатеренбург', current: false, active: false, geocoords: ['59.5439', '30.1751']}
-        ]
-      }
-    },
-    computed: {
-      current_city: { 
-        get: function() { 
-          let c = this.items.filter(c=>c.current === true );
-          return c.length>0 ? c[0].city : false
-        } 
-      }
-    },
-    methods: {
-      
-      _setCurrent: function(idOrCity){
-        this.items.map(i=>i.id == (idOrCity || i.city == idOrCity) ? i.current = true : i.current = i.active = false)
-      },
-
-      _setActive: function() {
-        this.items.map(i=>i.current ? i.active = true : '')
-      },
-
-      _resetActive: function(){
-        this.items.forEach(i=>{i.active = false;})
-        return this
-      },
-
-      _resetCurrent: function(){
-        this.items.forEach(i=>{i.current = i.active = false})
-        return this
+export default {
+  name: 'weatherpage',
+  components: {
+    weathercard
+  },
+  props: {
+    weekly: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data: function () {
+    return {
+      items: [
+        { id: 1, city: 'Москва', current: false, active: false, geocoords: ['55.4507', '37.3659'] },
+        { id: 2, city: 'Санкт-Петербург', current: true, active: false, geocoords: ['56.50', '60.35'] },
+        { id: 3, city: 'Екатеренбург', current: false, active: false, geocoords: ['59.5439', '30.1751'] }
+      ]
+    }
+  },
+  computed: {
+    current_city: {
+      get: function () {
+        let c = this.items.filter(c => c.current === true)
+        return c.length > 0 ? c[0].city : false
       }
     }
-  }
+  },
+  methods: {
 
-  let getTime = function (){
-    let wrapper = document.querySelector('#global-timer');
-    if (wrapper) {
-      let date = new Date();
-      let time = date.toLocaleTimeString();
-      wrapper.innerHTML = time;
+    _setCurrent: function (idOrCity) {
+      this.items.map(i => i.id == (idOrCity || i.city == idOrCity) ? i.current = true : i.current = i.active = false)
+    },
+
+    _setActive: function () {
+      this.items.map(i => i.current ? i.active = true : '')
+    },
+
+    _resetActive: function () {
+      this.items.forEach(i => { i.active = false })
+      return this
+    },
+
+    _resetCurrent: function () {
+      this.items.forEach(i => { i.current = i.active = false })
+      return this
     }
   }
+}
 
-  window.setInterval(getTime, 1000);
+let getTime = function () {
+  let wrapper = document.querySelector('#global-timer')
+  if (wrapper) {
+    let date = new Date()
+    let time = date.toLocaleTimeString()
+    wrapper.innerHTML = time
+  }
+}
+
+window.setInterval(getTime, 1000)
 
 </script>
 
 <style>
-  
+
   .weather {
     max-width: 960px;
     margin: 0 auto;
@@ -116,7 +114,7 @@
     cursor:pointer;
     position: relative;
   }
-  
+
   .weather__weather-header__button.current {
     color: #0c75be;
   }
@@ -136,7 +134,7 @@
   .weather__weather-header__button:hover:before {
     width: 33%;
   }
-  
+
   .weather__weather-header__button:active:before {
     width: 100%;
   }
@@ -147,7 +145,7 @@
     align-items: flex-start;
     justify-content: space-around;
   }
-  
+
   .weather__weather-wrapper__weather-card {
     margin: 16px 0;
     padding: 8px;
@@ -160,7 +158,7 @@
     /*transition: all .4s cubic-bezier(0.215, 0.61, 0.355, 1);*/
     animation: jump_off .8s cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
   }
-  
+
   .weather__weather-wrapper__weather-card.active {
     transition: all .4s cubic-bezier(0.215, 0.61, 0.355, 1);
     order: 0;

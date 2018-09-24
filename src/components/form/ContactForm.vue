@@ -10,37 +10,37 @@
 
 <script>
 
-  import contactFormItemTextInput from '@/components/form/ContactFormItem_text-input.vue'
-  import contactFormItemTextArea from '@/components/form/ContactFormItem_textarea.vue'
+import contactFormItemTextInput from '@/components/form/ContactFormItem_text-input.vue'
+import contactFormItemTextArea from '@/components/form/ContactFormItem_textarea.vue'
 
-  export default {
-    
-    name: 'contactform',
-    
-    components: {
-      contactFormItemTextInput,
-      contactFormItemTextArea
-    },
-    
-    methods: {
-      onSubmit: function() {
-        
-      }
-    },
-    
-    data: function () {
-      return {
-        items_text: [
-          { id: 'text_name', type: 'text', value: '', name: 'name', label: 'Имя', active: true },
-          { id: 'email_email', type: 'email', name: 'email', label: 'Почта', required: true }
-        ],
-        items_area: [
-          {id: 'area_message', name: 'message', label: 'Сообщение', required: true, fullwidth: true}
-        ]
-      }
+export default {
+
+  name: 'contactform',
+
+  components: {
+    contactFormItemTextInput,
+    contactFormItemTextArea
+  },
+
+  methods: {
+    onSubmit: function () {
+
     }
+  },
 
+  data: function () {
+    return {
+      items_text: [
+        { id: 'text_name', type: 'text', value: '', name: 'name', label: 'Имя', active: true },
+        { id: 'email_email', type: 'email', name: 'email', label: 'Почта', required: true }
+      ],
+      items_area: [
+        { id: 'area_message', name: 'message', label: 'Сообщение', required: true, fullwidth: true }
+      ]
+    }
   }
+
+}
 
 </script>
 
@@ -51,7 +51,7 @@
     margin: 0 auto;
     padding: 0;
   }
-  
+
   .contact-form__form {
     padding: 8px;
     margin: 0 auto;
@@ -67,7 +67,7 @@
     background-color: crimson;
     border: none;
     color:white;
-    font-size: 1.3em; 
+    font-size: 1.3em;
     flex: 0 0 51%;
     position: relative;
     cursor: pointer;
@@ -79,7 +79,7 @@
   .contact-form__form__button-submit:hover {
     box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -7px rgba(0,0,0,0.2);
   }
-  
+
   .contact-form__form__button-submit::before {
     content: "";
     position: absolute;

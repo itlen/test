@@ -17,8 +17,8 @@ export default {
     meta: [
       { vmid: 'description', property: 'description', content: 'Description for home page' },
       { vmid: 'og:title', property: 'og:title', content: 'Vue App' },
-      { vmid: 'og:description', property: 'og:description', content: 'Description for home page' },
-    ],
+      { vmid: 'og:description', property: 'og:description', content: 'Description for home page' }
+    ]
   }
 }
 </script>
