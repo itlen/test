@@ -78,9 +78,9 @@ export default {
     },
 
     _getForecastDataFromYandexWeatherApi () {
-      let url = 'http://api.openweathermap.org/data/2.5/forecast?id=' + this.id + '&cnt=70&APPID=f38105de7433463d32b25c8b566c7ab1'
+      let url = 'https://api.openweathermap.org/data/2.5/forecast?id=' + this.id + '&cnt=70&APPID=f38105de7433463d32b25c8b566c7ab1'
 
-      axios.get(url,{withCredentials: true})
+      axios.get(url)
         .then((response) => {
           let result = response.data.list
           let week = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
