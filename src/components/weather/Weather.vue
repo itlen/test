@@ -40,9 +40,9 @@ export default {
   data: function () {
     return {
       items: [
-        { id: 1, city: 'Москва', current: false, active: false, geocoords: ['55.4507', '37.3659'] },
-        { id: 2, city: 'Санкт-Петербург', current: true, active: false, geocoords: ['56.50', '60.35'] },
-        { id: 3, city: 'Екатеренбург', current: false, active: false, geocoords: ['59.5439', '30.1751'] }
+        { id: 524901, city: 'Москва', current: false, active: false },
+        { id: 498817, city: 'Санкт-Петербург', current: true, active: false },
+        { id: 1486209, city: 'Екатеренбург', current: false, active: false }
       ]
     }
   },

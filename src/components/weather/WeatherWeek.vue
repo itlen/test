@@ -1,6 +1,6 @@
 <template>
   <div class="weather__weather-wrapper__weather-card__week-day">
-    <p>{{ this.id }} {{ this.tAvr}} {{ this.weather }}</p>
+    <p>{{ this.date }}-{{ this.day }}-{{ this.tAvr}}&#176;</p>
   </div>
 </template>
 
@@ -14,8 +14,15 @@ export default {
       type: String,
       default: ''
     },
-    temperature: {
-      type: Array
+    day: {
+      type: String,
+      default: ''
+    },
+    date: {
+      type: Number
+    },
+    hour: {
+      type: Number
     },
     weather: {
       type: String,
@@ -24,6 +31,9 @@ export default {
     current: {
       type: Boolean,
       default: false
+    },
+    temperatureInDay: {
+      type: Array
     }
   },
   data: function () {
@@ -31,7 +41,7 @@ export default {
   },
   computed: {
     tAvr: function () {
-      return Math.floor(this.temperature.reduce((sum, current) => sum + current) / this.temperature.length)
+      return Number(this.temperatureInDay.reduce((s, c) => s + c) / this.temperatureInDay.length).toFixed(1)
     }
   },
 
