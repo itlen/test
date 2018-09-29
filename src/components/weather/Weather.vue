@@ -12,24 +12,24 @@
         :class="{current: item.current}"
         @click="_setCurrent(item.id)">{{ item.city }}</button>
     </div>
-    <weathercard
+    <weatherbycities
       v-for="item in items"
       :key="item.id"
       v-bind="item"
       @resetCurrent="_resetCurrent"
       @setActive="_setActive"
       @resetActive="_resetActive"
-      @setCurrent="_setCurrent(item.id)"></weathercard>
+      @setCurrent="_setCurrent(item.id)"></weatherbycities>
   </div>
 </template>
 
 <script>
-import weathercard from '@/components/weather/WeatherCard.vue'
+import weatherbycities from '@/components/weather/WeatherByCities.vue'
 
 export default {
   name: 'weatherpage',
   components: {
-    weathercard
+    weatherbycities
   },
   props: {
     weekly: {
@@ -40,8 +40,8 @@ export default {
   data: function () {
     return {
       items: [
-        { id: 524901, city: 'Москва', current: false, active: false },
-        { id: 498817, city: 'Санкт-Петербург', current: true, active: false },
+        { id: 524901, city: 'Москва', current: false, active: false, },
+        { id: 498817, city: 'Санкт-Петербург', current: false, active: false },
         { id: 1486209, city: 'Екатеренбург', current: false, active: false }
       ]
     }
@@ -153,7 +153,9 @@ window.setInterval(getTime, 1000)
     border-radius: 3px;
     order: 1;
     opacity: .8;
+    position: relative;
     background-color: white;
+
     box-shadow: 0 0 2px 0 rgba(0,0,0,.1), 0 2px 6px 0 rgba(0,0,0,.1);
     /*transition: all .4s cubic-bezier(0.215, 0.61, 0.355, 1);*/
     animation: jump_off .8s cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
@@ -162,8 +164,13 @@ window.setInterval(getTime, 1000)
   .weather__weather-wrapper__weather-card.active {
     transition: all .4s cubic-bezier(0.215, 0.61, 0.355, 1);
     order: 0;
+    padding: 2em;
     flex: 1 0 100%;
     max-width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
   .weather__weather-wrapper__weather-card.current {
@@ -181,12 +188,127 @@ window.setInterval(getTime, 1000)
       100% {transform: scale(1,1) translateY(0);color: #0c75be;opacity: 1;}
   }
 
-  .weather__weather-wrapper__weather-card__week {
-    display: none;
+  .weather__weather-wrapper__weather-card.cached::before {
+    content: 'offline availible';
+    font-size: 12px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
   }
 
-  .weather__weather-wrapper__weather-card.active .weather__weather-wrapper__weather-card__week {
+  .weather__weather-wrapper__weather-card.active
+  .weather__weather-wrapper__weather-card__city {
+    margin: 0;
+  }
+
+  .weather__weather-wrapper__weather-card__week {
+    flex: 1 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .weather__weather-wrapper__weather-card__week-day:not(.today) {
+    order:1;
+    flex: 0 0 120px;
+    background-color: #fbfbfb;
+    border: 1px solid #d6d5d5;
+    padding: 4px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,.1), 0 2px 6px 0 rgba(0,0,0,.1);
+  }
+
+  .weather__weather-wrapper__weather-card__week-day.today {
+    flex: 1 0 100%;
+    order:0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #d4d4d4;
+  }
+
+  .weather__weather-wrapper__weather-card__week-day__hours.active {
+    flex: 1 0 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .weather__weather-wrapper__weather-card__week-day__header {
+    font-size: 1em;
+    line-height: 1em;
+    font-weight: 100;
+    margin: 0;
+  }
+
+  .weather__weather-wrapper__weather-card__week-day__header span {
+    font-size: .8em;
+    line-height: 1em;
+    font-weight: 100;
     display: block;
+    text-align: left;
+    padding: 0 0 .2em 0;
+  }
+
+  .weather__weather-wrapper__weather-card__week-day.today
+  .weather__weather-wrapper__weather-card__week-day__header {
+    flex: 1 0 40%;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    margin: 14px 0;
+    line-height: 1em;
+  }
+
+  .weather__weather-wrapper__weather-card__week-day.today
+  .weather__weather-wrapper__weather-card__week-day__header span {
+    display: block;
+    font-size: 14px;
+    text-align: left;
+    padding: 0 0 .2em 0;
+    font-weight: 100;
+  }
+
+  .weather__weather-wrapper__weather-card__week-day__hour {
+    flex: 1 0 25%;
+    text-align: left;
+    font-size: .8em;
+    padding: 8px;
+    margin: 8px 0 8px 16px;
+    background-color: #fbfbfb;
+    border: 1px solid #d6d5d5;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,.1), 0 2px 6px 0 rgba(0,0,0,.1);
+  }
+
+  .weather__weather-wrapper__weather-card__week-day__hour span {
+    margin: 0 0 2px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .weather__weather-wrapper__weather-card__week-day__hour img {
+    float:left;
+  }
+
+  .weather__weather-wrapper__weather-card__week-day__hour b {
+    display: block;
+    padding: 14px 0;
+    font-size: 18px;
+    font-weight: 100;
+    float: right;
+  }
+
+  .weather__weather-wrapper__weather-card__week-day__hour b::before {
+    /*content:"t=";*/
+    margin-right: 2px;
   }
 
 </style>

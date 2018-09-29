@@ -2,6 +2,7 @@
   <header class="app-header">
     <nav>
       <router-link to="/">Home</router-link> |
+      <router-link to="/carusel">Carusel</router-link> |
       <router-link to="/weather">Weather</router-link> |
       <router-link to="/contacts">Contacts</router-link>
     </nav>

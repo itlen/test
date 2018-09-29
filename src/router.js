@@ -4,13 +4,17 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
-  // mode: 'history',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: () => import('./views/view_Home.vue')
+      name: 'homepage',
+      component: () => import('./views/view_Homepage.vue')
+    }, {
+      path: '/carusel',
+      name: 'carusel',
+      component: () => import('./views/view_Carusel.vue')
     },
     {
       path: '/weather',
