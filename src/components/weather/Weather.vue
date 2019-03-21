@@ -40,7 +40,7 @@ export default {
   data: function () {
     return {
       items: [
-        { id: 524901, city: 'Москва', current: false, active: false, },
+        { id: 524901, city: 'Москва', current: false, active: false },
         { id: 498817, city: 'Санкт-Петербург', current: false, active: false },
         { id: 1486209, city: 'Екатеренбург', current: false, active: false }
       ]
